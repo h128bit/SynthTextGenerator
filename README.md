@@ -29,3 +29,18 @@ generate(**d)
 In <code>path_to_save</code> folder will be created folders <code>src</code> to save text scenes, <code>mask</code> to save masks for text scenes 
 and create file <code>meta_info.json</code> contain information about words, four point word polygon, font name, font size, and word color on text scene.
 
+## Example
+
+<table>
+  <tr>
+    <th><img src="example_result/src/1.png" alt="drawing" width="200"/></th>
+    <th><img src="example_result/mask/mask_1.png" alt="drawing" width="200"/></th>
+  </tr>
+  <tr>
+    <td><img src="example_result/src/0.png" alt="drawing" width="200"/></td>
+    <td><img src="example_result/mask/mask_0.png" alt="drawing" width="200"/></td>
+  </tr>
+</table>
+
+
+

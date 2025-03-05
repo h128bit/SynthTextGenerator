@@ -6,7 +6,7 @@ from synthetic import generate
 path_to_background = "resources/backgrounds"
 path_to_fonts = "resources/fonts"
 path_to_corpus = "resources/corpus/russian.txt"
-path_to_save = "resources/result"
+path_to_save = "example_result"
 encoding='windows-1251'
 
 d = {
@@ -15,7 +15,8 @@ d = {
     "path_to_fonts": path_to_fonts,
     "path_to_background": path_to_background,
     "path_to_save": path_to_save,
-    "num_images": 2
+    "num_images": 2,
+    "num_words_range": (5, 51)
 }
 
 start = time.time()
