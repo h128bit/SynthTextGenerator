@@ -21,6 +21,25 @@ def generate(path_to_corpus: str,
              angle_range: tuple[int, int]=(-5, 5),
              transform=True) -> None:
 
+    """
+    Method for generate text scene.
+    Save result in path_to_save folder, create folders src for save text scenes, mask for save masked text scenes
+    and create json file meta_info.json with information about text scenes
+
+    :param path_to_corpus: path to language word corpus
+    :param encoding: encoding for corus file
+    :param path_to_fonts: path to folder with fonts or list with paths to the font
+    :param path_to_background: path to folder with images or list with paths to the images
+    :param path_to_save: path to save result
+    :param num_images: total number result images
+    :param font_size_range: font size range like (min size, max size)
+    :param max_blur_kernel_size: max size kernel for blur text
+    :param num_words_range: number words on image
+    :param angle_range: angle range
+    :param transform: bool, flag -- do perspective transform and blur image or no
+    :return: None
+    """
+
     get_word = load_random_word_from_corpus(path_to_corpus, encoding)
     get_backgrond = load_random_background(path_to_background)
     get_font = load_random_font(path_to_fonts)
@@ -41,6 +60,8 @@ def generate(path_to_corpus: str,
 
         for _ in range(num_words):
 
+            # place text on image and check what text boxes do not cross
+            # else change word, font property and text location
             while True:
                 font_size = np.random.randint(*font_size_range)
                 font_name = get_font()
