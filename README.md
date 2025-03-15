@@ -33,12 +33,12 @@ and create file <code>meta_info.json</code> contain information about words, fou
 
 <table>
   <tr>
-    <th><img src="example_result/src/1.png" alt="drawing" width="500"/></th>
-    <th><img src="example_result/mask/mask_1.png" alt="drawing" width="500"/></th>
+    <th><img src="example_result/src/0.png" alt="drawing" width="500"/></th>
+    <th><img src="example_result/mask/mask_0.png" alt="drawing" width="500"/></th>
   </tr>
   <tr>
-    <td><img src="example_result/src/0.png" alt="drawing" width="500"/></td>
-    <td><img src="example_result/mask/mask_0.png" alt="drawing" width="500"/></td>
+    <td><img src="example_result/src/1.png" alt="drawing" width="500"/></td>
+    <td><img src="example_result/mask/mask_1.png" alt="drawing" width="500"/></td>
   </tr>
 </table>
 

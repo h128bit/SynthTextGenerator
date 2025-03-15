@@ -19,7 +19,9 @@ def generate(path_to_corpus: str,
              max_blur_kernel_size: int=5,
              num_words_range: tuple[int, int]=(5, 101),
              angle_range: tuple[int, int]=(-5, 5),
-             transform=True) -> None:
+             max_trying_generate = 100,
+             transform=True,
+             quality_output_image: int=95) -> None:
 
     """
     Method for generate text scene.
@@ -36,7 +38,9 @@ def generate(path_to_corpus: str,
     :param max_blur_kernel_size: max size kernel for blur text
     :param num_words_range: number words on image
     :param angle_range: angle range
+    :param max_trying_generate: maximum number trying to generate one word on image
     :param transform: bool, flag -- do perspective transform and blur image or no
+    :param quality_output_image: quality output image. Is parameter quality in PIL.Image.save
     :return: None
     """
 
@@ -58,11 +62,11 @@ def generate(path_to_corpus: str,
         num_words_counter = 0
         words_info = []
 
+        shift = 0
         for _ in range(num_words):
-
             # place text on image and check what text boxes do not cross
             # else change word, font property and text location
-            while True:
+            for _ in range(max_trying_generate):
                 font_size = np.random.randint(*font_size_range)
                 font_name = get_font()
                 font = ImageFont.truetype(font_name, font_size, encoding='utf-8')
@@ -89,7 +93,7 @@ def generate(path_to_corpus: str,
                 np_mask_copy = np.array(im_mask_copy)
                 contours, _ = cv2.findContours(np_mask_copy, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-                if num_words_counter < len(contours):
+                if num_words_counter + shift < len(contours):
                     im_mask = im_mask_copy
 
                     txt = Image.new('L', bbox[2:4])
@@ -114,11 +118,13 @@ def generate(path_to_corpus: str,
 
                     num_words_counter += 1
                     break
+            else:
+                shift += 1
 
         name = f"{image_num}.png"
-        background.save(os.path.join(path_to_save, "src", name), optimize=True, quality=95)
+        background.save(os.path.join(path_to_save, "src", name), optimize=True, quality=quality_output_image)
         im_mask.save(os.path.join(path_to_save, 'mask', f'mask_{name}'))
-        meta_dict['name'] = words_info
+        meta_dict[name] = words_info
 
     json_string = json.dumps(meta_dict)
 
